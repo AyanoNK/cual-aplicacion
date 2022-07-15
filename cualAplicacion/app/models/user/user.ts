@@ -1,11 +1,15 @@
-import { Instance, SnapshotOut, types } from "mobx-state-tree"
+import { Instance, SnapshotOut, SnapshotIn, types } from "mobx-state-tree"
 
 /**
  * Model description here for TypeScript hints.
  */
 export const UserModel = types
   .model("User")
-  .props({})
+  .props({
+    id: types.identifier,
+    name: types.string,
+    surname: types.string,
+  })
   .views((self) => ({})) // eslint-disable-line @typescript-eslint/no-unused-vars
   .actions((self) => ({})) // eslint-disable-line @typescript-eslint/no-unused-vars
 

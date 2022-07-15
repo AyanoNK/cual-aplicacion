@@ -1,11 +1,19 @@
-import { Instance, SnapshotOut, types } from "mobx-state-tree"
+import { Instance, SnapshotOut, SnapshotIn, types } from "mobx-state-tree"
+import { UserModel } from "../user/user"
+import { WordModel } from "../word/word"
 
 /**
  * Model description here for TypeScript hints.
  */
 export const ComebackModel = types
   .model("Comeback")
-  .props({})
+  .props({
+    id: types.identifier,
+    user: types.reference(types.late(() => UserModel)),
+    word: types.reference(types.late(() => WordModel)),
+    comeback: types.string,
+    vote_count: types.number,
+  })
   .views((self) => ({})) // eslint-disable-line @typescript-eslint/no-unused-vars
   .actions((self) => ({})) // eslint-disable-line @typescript-eslint/no-unused-vars
 
