@@ -14,7 +14,7 @@ interface Props {
 
 const AuthProvider = (props: Props) => {
   // user null = loading
-  const [user, setUser] = useState<null | boolean>(null)
+  const [user, setUser] = useState<null | boolean>(false)
   const [session, setSession] = useState<Session | null>(null)
 
   useEffect(() => {

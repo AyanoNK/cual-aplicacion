@@ -7,21 +7,15 @@ import { Screen, Text } from "../../components"
 // import { useNavigation } from "@react-navigation/native"
 // import { useStores } from "../../models"
 import { color } from "../../theme"
+import { ActivityIndicator } from "react-native-paper"
 
 const ROOT: ViewStyle = {
   backgroundColor: color.palette.black,
   flex: 1,
+  justifyContent: "center",
+  alignItems: "center",
 }
 
-// STOP! READ ME FIRST!
-// To fix the TS error below, you'll need to add the following things in your navigation config:
-// - Add `loading: undefined` to NavigatorParamList
-// - Import your screen, and add it to the stack:
-//     `<Stack.Screen name="loading" component={LoadingScreen} />`
-// Hint: Look for the 🔥!
-
-// REMOVE ME! ⬇️ This TS ignore will not be necessary after you've added the correct navigator param type
-// @ts-ignore
 export const LoadingScreen: FC<StackScreenProps<NavigatorParamList, "loading">> = observer(
   function LoadingScreen() {
     // Pull in one of our MST stores
@@ -31,7 +25,7 @@ export const LoadingScreen: FC<StackScreenProps<NavigatorParamList, "loading">> 
     // const navigation = useNavigation()
     return (
       <Screen style={ROOT} preset="scroll">
-        <Text preset="header" text="Loader" />
+        <ActivityIndicator animating={true} size="large" color={color.palette.angry} />
       </Screen>
     )
   },

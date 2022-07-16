@@ -20,7 +20,10 @@ import { AppNavigator, useNavigationPersistence } from "./navigators"
 import { RootStore, RootStoreProvider, setupRootStore } from "./models"
 import { ToggleStorybook } from "../storybook/toggle-storybook"
 import { ErrorBoundary } from "./screens/error/error-boundary"
+import { Provider as PaperProvider } from "react-native-paper"
+
 import { AuthProvider } from "./providers/AuthProvider"
+import { paperTheme } from "./theme/paperTheme"
 
 // This puts screens in a native ViewController or Activity. If you want fully native
 // stack navigation, use `createNativeStackNavigator` in place of `createStackNavigator`:
@@ -62,10 +65,12 @@ function App() {
         <SafeAreaProvider initialMetrics={initialWindowMetrics}>
           <ErrorBoundary catchErrors={"always"}>
             <AuthProvider>
-              <AppNavigator
-                initialState={initialNavigationState}
-                onStateChange={onNavigationStateChange}
-              />
+              <PaperProvider theme={paperTheme}>
+                <AppNavigator
+                  initialState={initialNavigationState}
+                  onStateChange={onNavigationStateChange}
+                />
+              </PaperProvider>
             </AuthProvider>
           </ErrorBoundary>
         </SafeAreaProvider>
