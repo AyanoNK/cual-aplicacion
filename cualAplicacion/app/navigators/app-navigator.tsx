@@ -8,7 +8,14 @@ import React, { useContext } from "react"
 import { useColorScheme } from "react-native"
 import { NavigationContainer, DefaultTheme, DarkTheme } from "@react-navigation/native"
 import { createNativeStackNavigator } from "@react-navigation/native-stack"
-import { WelcomeScreen, DemoScreen, DemoListScreen, LoadingScreen } from "../screens"
+import {
+  WelcomeScreen,
+  DemoScreen,
+  DemoListScreen,
+  LoadingScreen,
+  LoginScreen,
+  SignupScreen,
+} from "../screens"
 import { navigationRef, useBackButtonHandler } from "./navigation-utilities"
 import { AuthContext } from "../providers/AuthProvider"
 
@@ -29,6 +36,8 @@ export type NavigatorParamList = {
   demo: undefined
   demoList: undefined
   loading: undefined
+  login: undefined
+  signup: undefined
   // 🔥 Your screens go here
 }
 
@@ -59,8 +68,8 @@ const AuthStack = () => {
       initialRouteName="welcome"
     >
       <Stack.Screen name="welcome" component={WelcomeScreen} />
-      <Stack.Screen name="demo" component={DemoScreen} />
-      <Stack.Screen name="demoList" component={DemoListScreen} />
+      <Stack.Screen name="login" component={LoginScreen} />
+      <Stack.Screen name="signup" component={SignupScreen} />
       {/** 🔥 Your screens go here */}
     </Stack.Navigator>
   )
