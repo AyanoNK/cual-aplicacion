@@ -31,7 +31,7 @@ export const LoadingScreen: FC<StackScreenProps<NavigatorParamList, "loading">> 
     // const navigation = useNavigation()
     return (
       <Screen style={ROOT} preset="scroll">
-        <Text preset="header" text="Joshua es gay" />
+        <Text preset="header" text="Loader" />
       </Screen>
     )
   },
