@@ -92,7 +92,7 @@ export const AppNavigator = (props: NavigationProps) => {
       theme={colorScheme === "dark" ? DarkTheme : DefaultTheme}
       {...props}
     >
-      {(user === null || user === undefined) && <LoadingStack />}
+      {user === null && <LoadingStack />}
       {user === true && <MainStack />}
       {user === false && <AuthStack />}
     </NavigationContainer>
