@@ -85,7 +85,6 @@ export const AppNavigator = (props: NavigationProps) => {
   const colorScheme = useColorScheme()
   const auth = useContext(AuthContext)
   const user = auth.user
-
   useBackButtonHandler(canExit)
   return (
     <NavigationContainer
@@ -93,10 +92,9 @@ export const AppNavigator = (props: NavigationProps) => {
       theme={colorScheme === "dark" ? DarkTheme : DefaultTheme}
       {...props}
     >
-      {user === null && <LoadingStack />}
+      {(user === null || user === undefined) && <LoadingStack />}
       {user === true && <MainStack />}
       {user === false && <AuthStack />}
-      <MainStack />
     </NavigationContainer>
   )
 }
