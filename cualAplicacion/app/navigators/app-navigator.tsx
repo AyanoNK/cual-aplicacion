@@ -4,12 +4,13 @@
  * Generally speaking, it will contain an auth flow (registration, login, forgot password)
  * and a "main" flow which the user will use once logged in.
  */
-import React from "react"
+import React, { useContext } from "react"
 import { useColorScheme } from "react-native"
 import { NavigationContainer, DefaultTheme, DarkTheme } from "@react-navigation/native"
 import { createNativeStackNavigator } from "@react-navigation/native-stack"
-import { WelcomeScreen, DemoScreen, DemoListScreen } from "../screens"
+import { WelcomeScreen, DemoScreen, DemoListScreen, LoadingScreen } from "../screens"
 import { navigationRef, useBackButtonHandler } from "./navigation-utilities"
+import { AuthContext } from "../providers/AuthProvider"
 
 /**
  * This type allows TypeScript to know what routes are defined in this navigator
@@ -26,14 +27,15 @@ import { navigationRef, useBackButtonHandler } from "./navigation-utilities"
 export type NavigatorParamList = {
   welcome: undefined
   demo: undefined
-  demoList: undefined
+  demoList: undefined,
+  loading: undefined
   // 🔥 Your screens go here
 }
 
 // Documentation: https://reactnavigation.org/docs/stack-navigator/
 const Stack = createNativeStackNavigator<NavigatorParamList>()
 
-const AppStack = () => {
+const MainStack = () => {
   return (
     <Stack.Navigator
       screenOptions={{
@@ -48,11 +50,42 @@ const AppStack = () => {
     </Stack.Navigator>
   )
 }
+const AuthStack = () => {
+  return (
+    <Stack.Navigator
+      screenOptions={{
+        headerShown: false,
+      }}
+      initialRouteName="welcome"
+    >
+      <Stack.Screen name="welcome" component={WelcomeScreen} />
+      <Stack.Screen name="demo" component={DemoScreen} />
+      <Stack.Screen name="demoList" component={DemoListScreen} />
+      {/** 🔥 Your screens go here */}
+    </Stack.Navigator>
+  )
+}
+const LoadingStack = () => {
+  return (
+    <Stack.Navigator
+      screenOptions={{
+        headerShown: false,
+      }}
+      initialRouteName="loading"
+    >
+      <Stack.Screen name="loading" component={LoadingScreen} />
+      {/** 🔥 Your screens go here */}
+    </Stack.Navigator>
+  )
+}
 
 interface NavigationProps extends Partial<React.ComponentProps<typeof NavigationContainer>> {}
 
 export const AppNavigator = (props: NavigationProps) => {
   const colorScheme = useColorScheme()
+  const auth = useContext(AuthContext)
+  const user = auth.user
+
   useBackButtonHandler(canExit)
   return (
     <NavigationContainer
@@ -60,7 +93,10 @@ export const AppNavigator = (props: NavigationProps) => {
       theme={colorScheme === "dark" ? DarkTheme : DefaultTheme}
       {...props}
     >
-      <AppStack />
+      {user === null ? <LoadingStack/>}
+      {user === true && <MainStack />}
+      {user === false && <AuthStack />}
+      <MainStack />
     </NavigationContainer>
   )
 }

@@ -45,6 +45,7 @@
     "mobx-react-lite": "3.4.0",
     "mobx-state-tree": "5.1.5",
     "react": "17.0.1",
+    "react-hook-form": "^7.33.1",
     "react-native": "https://github.com/expo/react-native/archive/sdk-43.0.0.tar.gz",
     "react-native-gesture-handler": "~1.10.2",
     "react-native-keychain": "8.0.0",
