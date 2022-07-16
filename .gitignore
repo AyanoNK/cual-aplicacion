@@ -126,6 +126,4 @@ dist
 .yarn/install-state.gz
 .pnp.*
 
-.env.dev
-.env.prod
-.env.example
+.env

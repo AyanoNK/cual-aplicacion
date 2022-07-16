@@ -1,13 +1,5 @@
 module.exports = {
   presets: ["babel-preset-expo"],
-  env: {
-    production: {
-      plugins: ["react-native-paper/babel"],
-    },
-    development: {
-      plugins: ["react-native-paper/babel"],
-    },
-  },
   plugins: [
     [
       "@babel/plugin-proposal-decorators",
@@ -16,5 +8,7 @@ module.exports = {
       },
     ],
     ["@babel/plugin-proposal-optional-catch-binding"],
+    ["inline-dotenv"],
+    ["react-native-paper/babel"],
   ],
 }
