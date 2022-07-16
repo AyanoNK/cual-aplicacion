@@ -27,7 +27,7 @@ import { AuthContext } from "../providers/AuthProvider"
 export type NavigatorParamList = {
   welcome: undefined
   demo: undefined
-  demoList: undefined,
+  demoList: undefined
   loading: undefined
   // 🔥 Your screens go here
 }
@@ -93,7 +93,7 @@ export const AppNavigator = (props: NavigationProps) => {
       theme={colorScheme === "dark" ? DarkTheme : DefaultTheme}
       {...props}
     >
-      {user === null ? <LoadingStack/>}
+      {user === null && <LoadingStack />}
       {user === true && <MainStack />}
       {user === false && <AuthStack />}
       <MainStack />
